@@ -15,6 +15,8 @@ class TestSignup:
         '''creates user records with usernames and passwords at /signup.'''
         
         with app.app_context():
+            db.drop_all()
+            db.create_all()
             
             User.query.delete()
             db.session.commit()
@@ -55,6 +57,8 @@ class TestSignup:
         '''422s invalid usernames at /signup.'''
         
         with app.app_context():
+            db.drop_all()
+            db.create_all()
             
             User.query.delete()
             db.session.commit()
@@ -83,6 +87,8 @@ class TestCheckSession:
         '''returns JSON for the user's data if there is an active session.'''
         
         with app.app_context():
+            db.drop_all()
+            db.create_all()
             
             User.query.delete()
             db.session.commit()
@@ -134,6 +140,8 @@ class TestLogin:
         '''logs users in with a username and password at /login.'''
         
         with app.app_context():
+            db.drop_all()
+            db.create_all()
             
             User.query.delete()
             db.session.commit()
@@ -169,6 +177,8 @@ class TestLogin:
         '''returns 401 for an invalid username and password at /login.'''
         
         with app.app_context():
+            db.drop_all()
+            db.create_all()
             
             User.query.delete()
             db.session.commit()
@@ -191,6 +201,8 @@ class TestLogout:
     def test_logs_out(self):
         '''logs users out at /logout.'''
         with app.app_context():
+            db.drop_all()
+            db.create_all()
             
             User.query.delete()
             db.session.commit()
@@ -230,6 +242,8 @@ class TestRecipeIndex:
         '''returns a list of recipes associated with the logged in user and a 200 status code.'''
 
         with app.app_context():
+            db.drop_all()
+            db.create_all()
             
             Recipe.query.delete()
             User.query.delete()
@@ -242,7 +256,6 @@ class TestRecipeIndex:
                 bio=fake.paragraph(nb_sentences=3),
                 image_url=fake.url(),
             )
-
             user.password_hash = 'secret'
 
             db.session.add(user)
@@ -286,6 +299,8 @@ class TestRecipeIndex:
     def test_get_route_returns_401_when_not_logged_in(self):
         
         with app.app_context():
+            db.drop_all()
+            db.create_all()
             
             Recipe.query.delete()
             User.query.delete()
@@ -306,6 +321,8 @@ class TestRecipeIndex:
         '''returns a list of recipes associated with the logged in user and a 200 status code.'''
 
         with app.app_context():
+            db.drop_all()
+            db.create_all()
             
             Recipe.query.delete()
             User.query.delete()
@@ -351,6 +368,8 @@ class TestRecipeIndex:
 
     def test_returns_422_for_invalid_recipes(self):
         with app.app_context():
+            db.drop_all()
+            db.create_all()
             
             Recipe.query.delete()
             User.query.delete()

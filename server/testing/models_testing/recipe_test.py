@@ -11,6 +11,8 @@ class TestRecipe:
         '''has attributes title, instructions, and minutes_to_complete.'''
         
         with app.app_context():
+            db.drop_all()
+            db.create_all()
 
             Recipe.query.delete()
             db.session.commit()
@@ -48,6 +50,8 @@ class TestRecipe:
         '''requires each record to have a title.'''
 
         with app.app_context():
+            db.drop_all()
+            db.create_all()
 
             Recipe.query.delete()
             db.session.commit()
@@ -60,6 +64,8 @@ class TestRecipe:
 
     def test_requires_50_plus_char_instructions(self):
         with app.app_context():
+            db.drop_all()
+            db.create_all()
 
             Recipe.query.delete()
             db.session.commit()
@@ -71,4 +77,3 @@ class TestRecipe:
                     instructions="idk lol")
                 db.session.add(recipe)
                 db.session.commit()
-

@@ -11,6 +11,8 @@ class TestUser:
         '''has attributes username, _password_hash, image_url, and bio.'''
         
         with app.app_context():
+            db.drop_all()
+            db.create_all()
 
             User.query.delete()
             db.session.commit()
@@ -29,7 +31,6 @@ class TestUser:
                     """ named her the seventh-greatest female screen legend """ + \
                     """of Classic Hollywood cinema."""
             )
-
             user.password_hash = "whosafraidofvirginiawoolf"
             
             db.session.add(user)
@@ -58,6 +59,8 @@ class TestUser:
         '''requires each record to have a username.'''
 
         with app.app_context():
+            db.drop_all()
+            db.create_all()
 
             User.query.delete()
             db.session.commit()
@@ -71,12 +74,16 @@ class TestUser:
         '''requires each record to have a username.'''
 
         with app.app_context():
+            db.drop_all()
+            db.create_all()
 
             User.query.delete()
             db.session.commit()
 
             user_1 = User(username="Ben")
+            user_1.password_hash = "password1"
             user_2 = User(username="Ben")
+            user_2.password_hash = "password2"
 
             with pytest.raises(IntegrityError):
                 db.session.add_all([user_1, user_2])
@@ -86,11 +93,14 @@ class TestUser:
         '''has records with lists of recipes records attached.'''
 
         with app.app_context():
+            db.drop_all()
+            db.create_all()
 
             User.query.delete()
             db.session.commit()
 
             user = User(username="Prabhdip")
+            user.password_hash = "password"
 
             recipe_1 = Recipe(
                 title="Delicious Shed Ham",
